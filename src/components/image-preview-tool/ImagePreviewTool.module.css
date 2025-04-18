@@ -1,0 +1,32 @@
+
+.image-preview-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
+.image-thumbnail-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.image-thumbnail {
+    width: 40px;
+    height: 40px;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.image-thumbnail-selected {
+    border: 2px solid blue;
+}
+
+.image {
+    width: 400px;
+    height: 400px;
+    object-fit: contain;
+}
