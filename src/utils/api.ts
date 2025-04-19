@@ -23,12 +23,12 @@ export async function getUser(token: string): Promise<User> {
     return response.data
 }
 
-export async function getCart(token: string): Promise<User> {
+export async function getCart(token: string): Promise<Product[]> {
     const response = await axios.get(`${BACKEND_URL}/cart`, { headers: { token }})
     return response.data
 }
 
-export async function addItemToCart(token: string, productId: number): Promise<User> {
+export async function addItemToCart(token: string, productId: number): Promise<string> {
     const response = await axios.post(`${BACKEND_URL}/cart`, { productId: productId }, { headers: { token }})
     return response.data
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './Login.module.css'
 import { login } from '../utils/api'
 import { useNavigate } from 'react-router-dom'
@@ -9,6 +9,10 @@ export default function Login() {
     const [password, setPassword] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
     const navigate = useNavigate()
+
+    useEffect(() => {
+        document.title = "Login"
+    }, []);
 
     if (localStorage.getItem('TOKEN')) {
         navigate('/')
