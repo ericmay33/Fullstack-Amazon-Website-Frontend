@@ -17,13 +17,15 @@ export default function ProductCard(props: ProductCardProps) {
     const navigate = useNavigate();
 
     async function handleAddToCart() {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('TOKEN');
         if (!token) {
+            console.log('no token')
             navigate('/login');
             return;
         }
 
         try {
+            console.log('send add request')
             await addItemToCart(token, props.id);
         } catch (err) {
             // Ignore errors
