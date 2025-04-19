@@ -53,10 +53,19 @@
     height: 40px;
     border-radius: 5px;
     border: solid 1px black;
-    box-shadow: 1px 1px 2px black;
+    box-shadow: 2px 2px 2px black;
     font-size: 14px;
     color: black;
     background-color: rgb(255, 238, 0);
     cursor: pointer;
+    transition: box-shadow 0.2s ease;
 }
 
+.cart-button:hover{
+    box-shadow: none;
+}
+
+.cart-button:active{
+    background: orange;
+    border: 2px solid black;
+}

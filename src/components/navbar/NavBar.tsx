@@ -66,10 +66,8 @@ export default function NavBar() {
 
     return (
         <div className={styles.navbar}>
-            <Link to="/"><img className={styles.logo} src={amazonLogo}/></Link>
-            <div className={styles['nav-items-container']}>
-                { createNavItems() }
-            </div>
+            <Link to="/"><img className={styles.logo} src={amazonLogo} /></Link>
+            { createNavItems() }
         </div>
     )
 }
