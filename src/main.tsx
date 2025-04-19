@@ -7,6 +7,7 @@ import ScrollToTop from './utils/ScrollToTop.tsx'
 import Browse from './pages/Browse.tsx'
 import Product from './pages/Product.tsx'
 import Login from './pages/Login.tsx'
+import Cart from './pages/Cart.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -17,6 +18,7 @@ createRoot(document.getElementById('root')!).render(
           <Route index element={<Browse/>}></Route>
           <Route path="/product/:id" element={<Product/>}></Route>
           <Route path="/login" element={<Login/>}></Route>
+          <Route path="/cart" element={<Cart/>}></Route>
         </Route> 
       </Routes>
     </BrowserRouter>
