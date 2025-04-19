@@ -11,13 +11,13 @@ export default function Login() {
     const navigate = useNavigate()
 
     useEffect(() => {
+        if (localStorage.getItem('TOKEN')) {
+            navigate('/')
+        }
+
         document.title = "Login"
     }, []);
-
-    if (localStorage.getItem('TOKEN')) {
-        navigate('/')
-    }
-
+    
     async function submitForm(e: any) {
         e.preventDefault()
         setErrorMessage('')
