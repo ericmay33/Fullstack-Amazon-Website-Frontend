@@ -4,11 +4,14 @@ import amazonLogo from '../../assets/amazon-logo.webp'
 import { useEffect, useState } from 'react'
 import { getUser } from '../../utils/api'
 import { User } from '../../utils/types'
+import { useNavigate } from 'react-router-dom'
 
 export default function NavBar() {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [user, setUser] = useState<User | null>(null)
+
+    const navigate = useNavigate();
 
     async function loadUser() {
         const token = localStorage.getItem('TOKEN')
@@ -38,6 +41,7 @@ export default function NavBar() {
         localStorage.removeItem('TOKEN')
         window.dispatchEvent(new Event("storage"));
         setIsLoggedIn(false)
+        navigate('/')
     }
 
     function createNavItems() {
@@ -45,18 +49,17 @@ export default function NavBar() {
             return (            
                 <Link className={styles.login} to="/login">Login</Link>
             )
-        }
-        else if (isLoggedIn && !user) {
+        } else if (isLoggedIn && !user) {
             return (
                 <button className={styles.logout} onClick={logout}>Logout</button>
             )
-        }
-        else {
+        } else {
             return (
-                <>
+                <div className={styles['nav-items-container']}>
                     <p className={styles.name}>{`${user!.firstName} ${user!.lastName}`}</p>
+                    <Link className={styles.cart} to="/cart">Cart</Link>
                     <button className={styles.logout} onClick={logout}>Logout</button>
-                </>
+                </div>
             )
         }
     }
