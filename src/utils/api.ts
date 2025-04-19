@@ -28,7 +28,6 @@ export async function getCart(token: string): Promise<Product[]> {
     return response.data
 }
 
-export async function addItemToCart(token: string, productId: number): Promise<string> {
-    const response = await axios.post(`${BACKEND_URL}/cart`, { productId: productId }, { headers: { token }})
-    return response.data
+export async function addItemToCart(token: string, productId: number): Promise<void> {
+    await axios.post(`${BACKEND_URL}/cart`, { productId: productId }, { headers: { token }})
 }

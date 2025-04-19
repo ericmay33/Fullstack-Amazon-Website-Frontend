@@ -27,6 +27,7 @@ export default function Browse() {
                     imageUrl={product.images[0]}
                     ratingAverage={product.ratingAverage}
                     price={product.price}
+                    showAddButton={true}
                 />
             )
         })

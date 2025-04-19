@@ -1,6 +1,8 @@
 import StarRating from '../star-rating/StarRating.tsx'
 import { Link } from 'react-router-dom'
 import styles from './ProductCard.module.css'
+import { addItemToCart } from '../../utils/api.ts'
+import { useNavigate } from 'react-router-dom'
 
 export interface ProductCardProps {
     id: number
@@ -8,9 +10,26 @@ export interface ProductCardProps {
     imageUrl: string
     ratingAverage: number
     price: number
+    showAddButton: boolean
 }
 
 export default function ProductCard(props: ProductCardProps) {
+    const navigate = useNavigate();
+
+    async function handleAddToCart() {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/login');
+            return;
+        }
+
+        try {
+            await addItemToCart(token, props.id);
+        } catch (err) {
+            // Ignore errors
+        }
+    }
+
     return (
         <div className={styles['product-container']}>
             <div className={styles['product-image-container']}>
@@ -23,6 +42,7 @@ export default function ProductCard(props: ProductCardProps) {
             </Link>
             <StarRating rating={props.ratingAverage} />
             <p>{`$${props.price.toFixed(2)}`}</p>
+            {props.showAddButton && <button className={styles['cart-button']} onClick={ () => handleAddToCart() }>Add to Cart</button>}
         </div>
     )
 }

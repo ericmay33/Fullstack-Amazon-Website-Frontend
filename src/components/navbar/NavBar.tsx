@@ -11,10 +11,20 @@ export default function NavBar() {
     const [user, setUser] = useState<User | null>(null)
 
     async function loadUser() {
-        const user = await getUser(localStorage.getItem('TOKEN')!)
-        setUser(user)
+        const token = localStorage.getItem('TOKEN')
+        if (token) {
+            const user = await getUser(token)
+            setUser(user)
+            setIsLoggedIn(true)
+        } else {
+            setIsLoggedIn(false)
+        }
     }
 
+    useEffect(() => {
+        loadUser();
+    }, []);
+    
     window.addEventListener('storage', () => {
         if (localStorage.getItem('TOKEN')) {
             setIsLoggedIn(true)
@@ -22,16 +32,7 @@ export default function NavBar() {
         else {
             setIsLoggedIn(false)
         }
-    })
-
-    useEffect(() => {
-        if (isLoggedIn) {
-            loadUser()
-        }
-        else {
-            setUser(null)
-        }
-    }, [isLoggedIn])
+    });
 
     function logout() {
         localStorage.removeItem('TOKEN')
