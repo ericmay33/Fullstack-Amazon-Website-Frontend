@@ -17,6 +17,7 @@ export default function NavBar() {
         const token = localStorage.getItem('TOKEN')
         if (token) {
             const user = await getUser(token)
+            console.log(user)
             setUser(user)
             setIsLoggedIn(true)
         } else {
@@ -26,7 +27,7 @@ export default function NavBar() {
 
     useEffect(() => {
         loadUser();
-    }, []);
+    }, [isLoggedIn]);
     
     window.addEventListener('storage', () => {
         if (localStorage.getItem('TOKEN')) {
