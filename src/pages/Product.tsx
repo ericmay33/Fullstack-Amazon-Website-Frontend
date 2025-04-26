@@ -7,6 +7,7 @@ import StarRating from '../components/star-rating/StarRating'
 import LoadingSpinner from '../components/loading-spinner/LoadingSpinner'
 import { wait } from '../utils/utils'
 import ImagePreviewTool from '../components/image-preview-tool/ImagePreviewTool'
+import { addItemToCart } from '../utils/api'
 
 export default function Product() {
     const idParam = useParams().id!
@@ -47,6 +48,21 @@ export default function Product() {
         )
     }
 
+    async function handleAddToCart() {
+        const token = localStorage.getItem('TOKEN');
+        if (!token) {
+            console.log('no token')
+            navigate('/login');
+            return;
+        }
+
+        try {
+            await addItemToCart(token, (product as Product).id);
+        } catch (err) {
+            // Ignore errors
+        }
+    }
+
     return (
         <div className={`${styles.flex} ${styles['flex-justify-center']}`}>
             <div className={styles['main-container']}>
@@ -61,6 +77,7 @@ export default function Product() {
                     </div>
                     <p>{product.description}</p>
                     { createPrice(product) }
+                    <button className={styles['cart-button']} onClick={ () => handleAddToCart() }>Add to Cart</button>
                 </div>
             </div>
         </div>
